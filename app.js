@@ -6,7 +6,9 @@ let carrinho = [];
 const menu = document.getElementById("menu");
 const cartInfo = document.getElementById("cartInfo");
 
-// PRODUTOS
+// =======================
+// MOSTRAR PRODUTOS
+// =======================
 PRODUTOS.forEach(p => {
   const div = document.createElement("div");
   div.className = "product";
@@ -14,26 +16,50 @@ PRODUTOS.forEach(p => {
   div.innerHTML = `
     <h3>${p.nome}</h3>
     <p>${p.descricao}</p>
-    <strong>R$ ${p.preco}</strong><br><br>
-    <button onclick="add('${p.nome}', ${p.preco})">Adicionar</button>
+
+    <strong>R$ ${p.preco}</strong>
+
+    <!-- 🔥 CAMPO DE OBSERVAÇÃO -->
+    <input 
+      id="obs-${p.nome}"
+      placeholder="Ex: sem milho / extra queijo"
+      style="width:100%; margin-top:5px; padding:8px;"
+    >
+
+    <button onclick="add('${p.nome}', ${p.preco})">
+      Adicionar
+    </button>
   `;
 
   menu.appendChild(div);
 });
 
-// ADICIONAR
+
+// =======================
+// ADICIONAR AO CARRINHO
+// =======================
 window.add = function(nome, preco) {
+
+  const obsInput = document.getElementById("obs-" + nome);
+  const observacao = obsInput ? obsInput.value : "";
+
   carrinho.push({
     nome,
     preco,
     quantidade: 1,
-    obs: ""
+    obs: observacao
   });
+
+  // limpa campo depois
+  if (obsInput) obsInput.value = "";
 
   atualizarCarrinho();
 };
 
-// ATUALIZAR CARRINHO
+
+// =======================
+// ATUALIZAR TEXTO CARRINHO
+// =======================
 function atualizarCarrinho() {
   let total = 0;
 
@@ -44,7 +70,10 @@ function atualizarCarrinho() {
   cartInfo.innerText = `${carrinho.length} itens | R$ ${total}`;
 }
 
-// ABRIR
+
+// =======================
+// ABRIR CHECKOUT
+// =======================
 window.abrirCheckout = function() {
   document.getElementById("checkout").style.display = "block";
   renderCarrinho();
@@ -55,35 +84,44 @@ window.fecharCheckout = function() {
   document.getElementById("checkout").style.display = "none";
 };
 
-// RENDER
+
+// =======================
+// RENDER DO CARRINHO
+// =======================
 function renderCarrinho() {
   const container = document.getElementById("listaCarrinho");
 
+  if (!container) return;
+
   if (carrinho.length === 0) {
-    container.innerHTML = "Carrinho vazio";
+    container.innerHTML = "<p>Carrinho vazio</p>";
     return;
   }
 
   let html = "";
 
-  carrinho.forEach((item, i) => {
+  carrinho.forEach((item, index) => {
     html += `
       <div style="background:#f5f5f5; padding:10px; margin-bottom:10px; border-radius:8px">
-
+        
         <strong>${item.nome}</strong><br>
 
-        <button onclick="diminuir(${i})">-</button>
+        Quantidade:
+        <button onclick="diminuir(${index})">-</button>
         ${item.quantidade}
-        <button onclick="aumentar(${i})">+</button>
+        <button onclick="aumentar(${index})">+</button>
 
+        <br><br>
+
+        Observação:
         <input 
           value="${item.obs}"
-          placeholder="Observação"
-          onchange="editarObs(${i}, this.value)"
+          onchange="editarObs(${index}, this.value)"
         >
 
-        <button onclick="remover(${i})">Remover</button>
+        <br><br>
 
+        <button onclick="remover(${index})">Remover</button>
       </div>
     `;
   });
@@ -91,34 +129,40 @@ function renderCarrinho() {
   container.innerHTML = html;
 }
 
-// FUNÇÕES
-window.aumentar = i => {
-  carrinho[i].quantidade++;
+
+// =======================
+// FUNÇÕES DO CARRINHO
+// =======================
+window.aumentar = function(index) {
+  carrinho[index].quantidade++;
   renderCarrinho();
   atualizarCarrinho();
 };
 
-window.diminuir = i => {
-  if (carrinho[i].quantidade > 1) {
-    carrinho[i].quantidade--;
+window.diminuir = function(index) {
+  if (carrinho[index].quantidade > 1) {
+    carrinho[index].quantidade--;
   } else {
-    carrinho.splice(i, 1);
+    carrinho.splice(index, 1);
   }
   renderCarrinho();
   atualizarCarrinho();
 };
 
-window.remover = i => {
-  carrinho.splice(i, 1);
+window.remover = function(index) {
+  carrinho.splice(index, 1);
   renderCarrinho();
   atualizarCarrinho();
 };
 
-window.editarObs = (i, val) => {
-  carrinho[i].obs = val;
+window.editarObs = function(index, valor) {
+  carrinho[index].obs = valor;
 };
 
-// WHATSAPP
+
+// =======================
+// ENVIAR PARA WHATSAPP
+// =======================
 window.enviar = function() {
   if (carrinho.length === 0) {
     alert("Carrinho vazio");
@@ -134,7 +178,11 @@ window.enviar = function() {
 
   carrinho.forEach(item => {
     msg += `${item.quantidade}x ${item.nome}`;
-    if (item.obs) msg += ` (Obs: ${item.obs})`;
+
+    if (item.obs) {
+      msg += ` (Obs: ${item.obs})`;
+    }
+
     msg += "\n";
   });
 
@@ -143,5 +191,7 @@ window.enviar = function() {
   msg += `\n📞 ${telefone}`;
   msg += `\n💳 ${pagamento}`;
 
-  window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`);
+  const url = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+
+  window.open(url, "_blank");
 };
