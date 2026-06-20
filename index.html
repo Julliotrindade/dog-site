@@ -7,9 +7,7 @@
 
 <body>
 
-<header>
-  Dog da Praça
-</header>
+<header>Dog da Praça</header>
 
 <main id="menu"></main>
 
@@ -19,34 +17,8 @@
   <button onclick="abrirCheckout()">Finalizar</button>
 </div>
 
-<!-- CHECKOUT -->
-<div id="checkout">
-  <h2>Seu Carrinho</h2>
-
-  <div id="listaCarrinho"></div>
-
-  <hr>
-
-  <input id="nome" placeholder="Nome">
-  <input id="endereco" placeholder="Endereço">
-  <input id="telefone" placeholder="Telefone">
-
-  <select id="pagamento" onchange="mostrarTroco()">
-    <option value="">Pagamento</option>
-    <option value="Pix">Pix</option>
-    <option value="Crédito">Crédito</option>
-    <option value="Débito">Débito</option>
-    <option value="Dinheiro">Dinheiro</option>
-  </select>
-
-  <div id="areaTroco">
-    <input id="valorPago" placeholder="Troco para quanto?" oninput="calcularTroco()">
-    <p id="trocoResultado"></p>
-  </div>
-
-  <button onclick="enviar()">Enviar Pedido</button>
-  <button onclick="fecharCheckout()">Fechar</button>
-</div>
+<!-- OVERLAY -->
+<div id="overlay"></div>
 
 <!-- MODAL -->
 <div id="modalProduto">
@@ -54,7 +26,7 @@
   <p id="modalDesc"></p>
   <strong id="modalPreco"></strong>
 
-  <div>
+  <div class="qtd-box">
     <button onclick="diminuirQtd()">-</button>
     <span id="modalQtd">1</span>
     <button onclick="aumentarQtd()">+</button>
@@ -64,8 +36,11 @@
 
   <input id="modalObs" placeholder="Observação">
 
-  <button onclick="confirmarAdd()">Adicionar ao carrinho</button>
-  <button onclick="fecharModal()">Cancelar</button>
+  <button class="btn-add-main" onclick="confirmarAdd()">
+    Adicionar ao carrinho
+  </button>
+
+  <button class="btn-cancel" onclick="fecharModal()">Cancelar</button>
 </div>
 
 <script type="module" src="app.js"></script>
