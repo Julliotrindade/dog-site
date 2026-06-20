@@ -1,8 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dog da Praça</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>Dog da Praça</header>
+
+<main id="menu"></main>
+
+<!-- CARRINHO -->
+<div id="cart">
+  <span id="cartInfo">0 itens</span>
+  <button onclick="abrirCheckout()">Finalizar</button>
+</div>
+
+<!-- OVERLAY -->
 <div id="overlay"></div>
 
+<!-- MODAL -->
 <div id="modalProduto">
 
-  <!-- IMAGEM GRANDE -->
   <img id="modalImg" class="modal-img">
 
   <div class="modal-content">
@@ -10,25 +30,40 @@
     <p id="modalDesc" class="modal-desc"></p>
     <strong id="modalPreco"></strong>
 
-    <!-- QTD -->
     <div class="qtd-box">
       <button onclick="diminuirQtd()">-</button>
       <span id="modalQtd">1</span>
       <button onclick="aumentarQtd()">+</button>
     </div>
 
-    <!-- OBS -->
-    <input id="modalObs" placeholder="Alguma observação?">
+    <input id="modalObs" placeholder="Observação">
 
-    <!-- BOTÕES -->
     <button class="btn-add-main" onclick="confirmarAdd()">
       Adicionar ao carrinho
     </button>
 
-    <button class="btn-cancel" onclick="fecharModal()">
-      Cancelar
-    </button>
-
+    <button onclick="fecharModal()">Cancelar</button>
   </div>
 
 </div>
+
+<!-- CHECKOUT -->
+<div id="checkout" style="display:none;">
+
+  <h2>Finalizar Pedido</h2>
+  <div id="listaCarrinho"></div>
+
+  <input id="nome" placeholder="Nome">
+  <input id="endereco" placeholder="Endereço">
+  <input id="telefone" placeholder="Telefone">
+
+  <button onclick="enviar()">Enviar Pedido</button>
+  <button onclick="fecharCheckout()">Cancelar</button>
+
+</div>
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
+``
