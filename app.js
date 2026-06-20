@@ -28,8 +28,8 @@ PRODUTOS.forEach(p => {
 // =======================
 window.add = function(nome, preco) {
   carrinho.push({
-    nome: nome,
-    preco: preco,
+    nome,
+    preco,
     quantidade: 1,
     obs: ""
   });
@@ -38,7 +38,7 @@ window.add = function(nome, preco) {
 };
 
 // =======================
-// MOSTRAR QUANTIDADE
+// ATUALIZAR TEXTO CARRINHO
 // =======================
 function atualizarCarrinho() {
   cartInfo.innerText = carrinho.length + " itens";
@@ -49,11 +49,11 @@ function atualizarCarrinho() {
 // =======================
 window.abrirCheckout = function() {
   document.getElementById("checkout").style.display = "block";
-  renderCarrinho(); // 🔥 IMPORTANTE
+  renderCarrinho();
 };
 
 // =======================
-// MOSTRAR ITENS DO CARRINHO
+// RENDER CARRINHO
 // =======================
 function renderCarrinho() {
   const container = document.getElementById("listaCarrinho");
@@ -122,7 +122,7 @@ window.editarObs = function(index, valor) {
 };
 
 // =======================
-// ENVIAR PARA WHATSAPP
+// ENVIAR WHATSAPP
 // =======================
 window.enviar = function() {
   if (carrinho.length === 0) {
@@ -139,11 +139,7 @@ window.enviar = function() {
 
   carrinho.forEach(item => {
     msg += `${item.quantidade}x ${item.nome}`;
-
-    if (item.obs) {
-      msg += ` (Obs: ${item.obs})`;
-    }
-
+    if (item.obs) msg += ` (Obs: ${item.obs})`;
     msg += "\n";
   });
 
@@ -153,6 +149,5 @@ window.enviar = function() {
   msg += `\n💳 ${pagamento}`;
 
   const url = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
-
   window.open(url, "_blank");
 };
