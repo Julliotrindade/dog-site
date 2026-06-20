@@ -8,7 +8,7 @@
 <body>
 
 <header>
-  <h2>Dog da Praça</h2>
+  Dog da Praça
 </header>
 
 <main id="menu"></main>
@@ -20,19 +20,20 @@
 </div>
 
 <!-- CHECKOUT -->
-<div id="checkout" style="display:none; padding:10px; background:white; position:fixed; top:0; left:0; right:0; height:100%; overflow:auto;">
+<div id="checkout">
 
-  <h3>Seu Carrinho</h3>
+  <h2>Seu Carrinho</h2>
 
-  <!-- LISTA DO CARRINHO -->
+  <!-- LISTA -->
   <div id="listaCarrinho"></div>
 
   <hr>
 
-  <!-- DADOS -->
-  <input id="nome" placeholder="Nome"><br><br>
-  <input id="endereco" placeholder="Endereço"><br><br>
-  <input id="telefone" placeholder="Telefone"><br><br>
+  <h3>Seus dados</h3>
+
+  <input id="nome" placeholder="Nome">
+  <input id="endereco" placeholder="Endereço">
+  <input id="telefone" placeholder="Telefone">
 
   <select id="pagamento">
     <option value="">Pagamento</option>
@@ -40,11 +41,18 @@
     <option value="Crédito">Crédito</option>
     <option value="Débito">Débito</option>
     <option value="Dinheiro">Dinheiro</option>
-  </select><br><br>
+  </select>
+
+  <br><br>
 
   <button onclick="enviar()">Enviar Pedido</button>
-
   <br><br>
   <button onclick="fecharCheckout()">Fechar</button>
 
 </div>
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
+``
