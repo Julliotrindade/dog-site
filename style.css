@@ -87,16 +87,25 @@ header {
 
 /* MODAL */
 #modalProduto {
-  display: none;
+  display: none; /* 🔥 ESSENCIAL */
+
   position: fixed;
   bottom: 0;
-  width: 100%;
+  left: 0;
+  right: 0;
+
   height: 60%;
   background: white;
-  border-radius: 20px 20px 0 0;
+
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
   padding: 15px;
-  animation: subir 0.25s;
-  display: flex;
+
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
+
+  animation: subir 0.25s ease;
+
   flex-direction: column;
   gap: 10px;
 }
