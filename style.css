@@ -125,3 +125,19 @@ button {
   padding: 15px;
   overflow: auto;
 }
+/* BOTÕES DE QTD */
+.qtd-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: #ddd;
+}
+
+/* INPUT DO CARRINHO */
+#listaCarrinho input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
