@@ -14,13 +14,31 @@ export const PRODUTOS = [
   {
     nome: "Americano",
     descricao: "Pão de batata, linguiça calabresa, frango, cheddar, milho e ervilha, batata palha, queijo ralado.",
-    preco: 9,
+    preco: 10,
     imagem: "<img src='img/carnesol.jpg'>"
   },
   {
-    nome: "Americano",
-    descricao: "Frango, calabresa, milho e cheddar",
+    nome: "Guaraná 1L",
+    descricao: "Gelado",
     preco: 10,
     imagem: "<img src='img/americano.jpg'>"
-  }
+  },
+  {
+    nome: "Guaraná 1L",
+    descricao: "Gelado",
+    preco: 10,
+    imagem: "<img src='img/americano.jpg'>"
+  },
+  {
+    nome: "Guaraná 1L",
+    descricao: "Gelado",
+    preco: 10,
+    imagem: "<img src='img/americano.jpg'>"
+  },
+  {
+    nome: "Guaraná 1L",
+    descricao: "Gelado",
+    preco: 10,
+    imagem: "<img src='img/americano.jpg'>"
+  },
 ];
