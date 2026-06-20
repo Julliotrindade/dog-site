@@ -156,3 +156,11 @@ input, select {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+.btn-add:active {
+  transform: scale(0.9);
+}
+
+.btn-add {
+  transition: transform 0.15s ease;
+}
