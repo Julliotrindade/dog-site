@@ -18,10 +18,10 @@
 </div>
 
 <!-- OVERLAY -->
-<div id="overlay"></div>
+<div id="overlay" style="display:none;"></div>
 
 <!-- MODAL PRODUTO -->
-<div id="modalProduto">
+<div id="modalProduto" style="display:none;">
 
   <h2 id="modalNome"></h2>
   <p id="modalDesc"></p>
@@ -32,8 +32,6 @@
     <span id="modalQtd">1</span>
     <button onclick="aumentarQtd()">+</button>
   </div>
-
-  <div id="sabores"></div>
 
   <input id="modalObs" placeholder="Observação">
 
@@ -48,7 +46,7 @@
 </div>
 
 <!-- CHECKOUT -->
-<div id="checkout">
+<div id="checkout" style="display:none;">
 
   <h2>Finalizar Pedido</h2>
 
@@ -66,7 +64,7 @@
     <option value="Dinheiro">Dinheiro</option>
   </select>
 
-  <div id="areaTroco">
+  <div id="areaTroco" style="display:none;">
     <input id="valorPago" placeholder="Troco para quanto?" oninput="calcularTroco()">
     <p id="trocoResultado"></p>
   </div>
