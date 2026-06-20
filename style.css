@@ -70,3 +70,27 @@ input, select {
   border-radius: 6px;
   border: 1px solid #ccc;
 }
+
+.product {
+  transition: transform 0.2s;
+}
+
+.product:hover {
+  transform: scale(1.02);
+}
+
+/* botão limpar */
+.btn-clear {
+  background: #555;
+  margin-top: 10px;
+}
+
+/* animação modal */
+#modalProduto {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
