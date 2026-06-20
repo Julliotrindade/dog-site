@@ -146,4 +146,54 @@ header {
   transition: all 0.6s ease-in-out;
   z-index: 9999;
 }
+
+/* BASE PARA TODOS OS BOTÕES */
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* BOTÃO PRINCIPAL (Adicionar) */
+.btn-add-main {
+  background: #e21;
+  color: white;
+  font-weight: bold;
+}
+
+/* BOTÃO FINALIZAR */
+.btn-finalizar {
+  background: white;
+  color: #e21;
+  font-weight: bold;
+  padding: 10px 14px;
+}
+
+/* BOTÃO CANCELAR */
+.btn-cancel {
+  background: #eee;
+  color: #333;
+}
+
+/* BOTÃO REMOVER */
+.btn-remove {
+  background: #555;
+  color: white;
+}
+
+/* HOVER */
+button:hover {
+  transform: scale(1.03);
+}
+
+/* INPUT OBSERVAÇÃO */
+#modalObs {
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
 ``
