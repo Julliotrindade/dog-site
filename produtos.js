@@ -18,13 +18,13 @@ export const PRODUTOS = [
     nome: "Refrigerante 1L",
     descricao: "Coca-ZERO, Guaraná e Pepis",
     preco: 10
-    sabores: ["Coca", "Fanta", "Guaraná"]
+    sabores: ["Coca", "Fanta", "Guaraná"],
   },
   {
     nome: "Refri 250ML",
     descricao: "Soda limão, Uva e Dore-cola.",
     preco: 3
-    sabores: ["Coca", "Fanta", "Guaraná"]
+    sabores: ["Coca", "Fanta", "Guaraná"],
   }
   
 ];
