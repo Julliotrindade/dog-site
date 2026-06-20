@@ -20,9 +20,16 @@
 </div>
 
 <!-- CHECKOUT -->
-<div id="checkout" style="display:none; padding:10px; background:white; position:fixed; top:0; left:0; right:0;">
-  <h3>Finalizar Pedido</h3>
+<div id="checkout" style="display:none; padding:10px; background:white; position:fixed; top:0; left:0; right:0; height:100%; overflow:auto;">
 
+  <h3>Seu Carrinho</h3>
+
+  <!-- LISTA DO CARRINHO -->
+  <div id="listaCarrinho"></div>
+
+  <hr>
+
+  <!-- DADOS -->
   <input id="nome" placeholder="Nome"><br><br>
   <input id="endereco" placeholder="Endereço"><br><br>
   <input id="telefone" placeholder="Telefone"><br><br>
@@ -35,12 +42,9 @@
     <option value="Dinheiro">Dinheiro</option>
   </select><br><br>
 
-  <textarea id="obs" placeholder="Observações"></textarea><br><br>
-
   <button onclick="enviar()">Enviar Pedido</button>
+
+  <br><br>
+  <button onclick="fecharCheckout()">Fechar</button>
+
 </div>
-
-<script type="module" src="app.js"></script>
-
-</body>
-</html>
