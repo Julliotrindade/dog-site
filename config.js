@@ -1,3 +1,3 @@
 export const CONFIG = {
-  whatsapp: "5584999999999"
+  whatsapp: "5584996564129"
 };
