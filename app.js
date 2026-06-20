@@ -229,5 +229,5 @@ window.enviar = () => {
   msg += `\n📞 ${telefone}`;
   msg += `\n💳 ${pagamento}`;
 
-  window.open(`https://wa.me/5584999999999?text=${encodeURIComponent(msg)}`);
+  window.open(`https://wa.me/5584996564129?text=${encodeURIComponent(msg)}`);
 };
