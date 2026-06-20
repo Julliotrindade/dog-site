@@ -1,7 +1,6 @@
-/* RESET */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   background: #f2f2f2;
 }
 
@@ -9,34 +8,25 @@ body {
 header {
   background: #e21;
   color: white;
-  padding: 16px;
+  padding: 15px;
   text-align: center;
-  font-size: 18px;
-  font-weight: bold;
 }
 
-/* ===================== */
-/* GRID DE PRODUTOS */
-/* ===================== */
+/* GRID */
 #menu {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 10px;
   padding: 10px;
 }
 
 /* CARD */
 .product {
   background: white;
-  border-radius: 12px;
-  padding: 10px;
+  border-radius: 10px;
+  padding: 8px;
   position: relative;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease;
-}
-
-.product:hover {
-  transform: scale(1.02);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.1);
 }
 
 /* IMAGEM */
@@ -47,25 +37,10 @@ header {
   border-radius: 8px;
 }
 
-
-/* TEXTO */
-.product h3 {
-  margin: 6px 0 2px;
-  font-size: 14px;
-}
-
-.product p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
-}
-
 /* PREÇO */
 .price {
-  margin-top: 5px;
+  color: green;
   font-weight: bold;
-  color: #1a8f3c;
-  font-size: 15px;
 }
 
 /* BOTÃO + */
@@ -73,158 +48,93 @@ header {
   position: absolute;
   bottom: 10px;
   right: 10px;
-
-  background: white;
-  color: red;
-
-  width: 42px;
-  height: 42px;
-
+  background: red;
+  color: white;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-
   display: flex;
-  align-items: center;
   justify-content: center;
-
+  align-items: center;
   font-size: 22px;
-  cursor: pointer;
-
-  transition: transform 0.15s ease;
+  transition: 0.2s;
 }
 
 .btn-add:active {
   transform: scale(0.85);
 }
 
-/* ===================== */
-/* CARRINHO FIXO */
-/* ===================== */
+/* CARRINHO */
 #cart {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
-
-  background: #e21;
+  width: 100%;
+  background: red;
   color: white;
-
+  padding: 12px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-
-  padding: 12px;
-  font-size: 14px;
-
-  transition: transform 0.2s ease;
+  transition: 0.2s;
 }
 
-#cart button {
-  background: white;
-  color: #e21;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-weight: bold;
-}
-
-/* ===================== */
-/* CHECKOUT */
-/* ===================== */
-#checkout {
+/* OVERLAY */
+#overlay {
   display: none;
-
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  background: white;
-  padding: 15px;
-  overflow: auto;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
 }
 
-/* INPUT */
-input, select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 6px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-/* BOTÕES */
-button {
-  margin-top: 10px;
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  background: #e21;
-  color: white;
-  font-size: 15px;
-}
-
-/* LIMPAR */
-.btn-clear {
-  background: #555;
-}
-
-/* ===================== */
-/* MODAL (ITEM) */
-/* ===================== */
+/* MODAL */
 #modalProduto {
   display: none;
-
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
-
-  height: 60%; /* 🔥 tamanho reduzido */
-
+  width: 100%;
+  height: 60%;
   background: white;
-
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-
+  border-radius: 20px 20px 0 0;
   padding: 15px;
-
-  box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
-
-  animation: subir 0.25s ease;
-
-  overflow: auto;
+  animation: subir 0.25s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-
-/* ANIMAÇÃO DO MODAL */
 @keyframes subir {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }
 
-/* SABORES */
-#sabores label {
-  display: block;
-  margin-top: 5px;
+.qtd-box {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
-/* TROCO */
-#areaTroco {
-  display: none;
-  margin-top: 10px;
+.qtd-box button {
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
 }
 
-/* TEXTO TROCO */
-#trocoResultado {
-  margin-top: 5px;
-  font-weight: bold;
-  color: green;
+.btn-add-main {
+  background: red;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
 }
+
+.btn-cancel {
+  background: #ddd;
+}
+
+/* ANIMAÇÃO DE VOO */
+.voando {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  transition: all 0.6s ease-in-out;
+  z-index: 9999;
+}
+``
