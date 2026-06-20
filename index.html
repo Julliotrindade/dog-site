@@ -1,33 +1,3 @@
-<!-- MODAL DO PRODUTO -->
-<div id="modalProduto" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:white; z-index:999; padding:20px; overflow:auto;">
-
-  <h2 id="modalNome"></h2>
-  <p id="modalDesc"></p>
-  <strong id="modalPreco"></strong>
-
-  <br><br>
-
-  <h3>Quantidade</h3>
-  <button onclick="diminuirQtd()">-</button>
-  <span id="modalQtd">1</span>
-  <button onclick="aumentarQtd()">+</button>
-
-  <br><br>
-
-  <h3>Observação</h3>
-  <input id="modalObs" placeholder="Ex: sem milho">
-
-  <br><br>
-
-  <button onclick="confirmarAdd()">Adicionar ao carrinho</button>
-  <br><br>
-  <button onclick="fecharModal()">Cancelar</button>
-  <div id="sabores"></div>
-
-</div>
-``
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,21 +21,17 @@
 
 <!-- CHECKOUT -->
 <div id="checkout">
-
   <h2>Seu Carrinho</h2>
 
-  <!-- LISTA -->
   <div id="listaCarrinho"></div>
 
   <hr>
-
-  <h3>Seus dados</h3>
 
   <input id="nome" placeholder="Nome">
   <input id="endereco" placeholder="Endereço">
   <input id="telefone" placeholder="Telefone">
 
-  <select id="pagamento">
+  <select id="pagamento" onchange="mostrarTroco()">
     <option value="">Pagamento</option>
     <option value="Pix">Pix</option>
     <option value="Crédito">Crédito</option>
@@ -73,16 +39,36 @@
     <option value="Dinheiro">Dinheiro</option>
   </select>
 
-  <br><br>
+  <div id="areaTroco">
+    <input id="valorPago" placeholder="Troco para quanto?" oninput="calcularTroco()">
+    <p id="trocoResultado"></p>
+  </div>
 
   <button onclick="enviar()">Enviar Pedido</button>
-  <br><br>
   <button onclick="fecharCheckout()">Fechar</button>
+</div>
 
+<!-- MODAL -->
+<div id="modalProduto">
+  <h2 id="modalNome"></h2>
+  <p id="modalDesc"></p>
+  <strong id="modalPreco"></strong>
+
+  <div>
+    <button onclick="diminuirQtd()">-</button>
+    <span id="modalQtd">1</span>
+    <button onclick="aumentarQtd()">+</button>
+  </div>
+
+  <div id="sabores"></div>
+
+  <input id="modalObs" placeholder="Observação">
+
+  <button onclick="confirmarAdd()">Adicionar ao carrinho</button>
+  <button onclick="fecharModal()">Cancelar</button>
 </div>
 
 <script type="module" src="app.js"></script>
 
 </body>
 </html>
-``
