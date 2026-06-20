@@ -5,7 +5,7 @@ export const PRODUTOS = [
     preco: 7
   },
   {
-    nome: "Tradicional",
+    nome: "Carne de sol na nata",
     descricao: "Pão de batata, salsicha, carne de sol na nata, milho e ervilha, batata palha, queijo ralado.",
     preco: "9"
   },
