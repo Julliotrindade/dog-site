@@ -14,14 +14,15 @@
 <!-- CARRINHO -->
 <div id="cart">
   <span id="cartInfo">0 itens</span>
-  <button onclick="abrirCheckout()">Finalizar</button>
+  <button class="btn-finalizar" onclick="abrirCheckout()">Finalizar</button>
 </div>
 
 <!-- OVERLAY -->
 <div id="overlay"></div>
 
-<!-- MODAL -->
+<!-- MODAL PRODUTO -->
 <div id="modalProduto">
+
   <h2 id="modalNome"></h2>
   <p id="modalDesc"></p>
   <strong id="modalPreco"></strong>
@@ -40,7 +41,44 @@
     Adicionar ao carrinho
   </button>
 
-  <button class="btn-cancel" onclick="fecharModal()">Cancelar</button>
+  <button class="btn-cancel" onclick="fecharModal()">
+    Cancelar
+  </button>
+
+</div>
+
+<!-- CHECKOUT -->
+<div id="checkout">
+
+  <h2>Finalizar Pedido</h2>
+
+  <div id="listaCarrinho"></div>
+
+  <input id="nome" placeholder="Nome">
+  <input id="endereco" placeholder="Endereço">
+  <input id="telefone" placeholder="Telefone">
+
+  <select id="pagamento" onchange="mostrarTroco()">
+    <option value="">Pagamento</option>
+    <option value="Pix">Pix</option>
+    <option value="Débito">Débito</option>
+    <option value="Crédito">Crédito</option>
+    <option value="Dinheiro">Dinheiro</option>
+  </select>
+
+  <div id="areaTroco">
+    <input id="valorPago" placeholder="Troco para quanto?" oninput="calcularTroco()">
+    <p id="trocoResultado"></p>
+  </div>
+
+  <button class="btn-add-main" onclick="enviar()">
+    Enviar Pedido
+  </button>
+
+  <button class="btn-cancel" onclick="fecharCheckout()">
+    Cancelar
+  </button>
+
 </div>
 
 <script type="module" src="app.js"></script>
