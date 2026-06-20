@@ -1,107 +1,44 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dog da Praça</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="site-header">
-  <div class="brand">
-    <span id="brandName"></span>
-    <span id="brandSlogan"></span>
-  </div>
-
-  <button id="openCartBtn">
-    🛒 (<span id="cartCount">0</span>)
-  </button>
+<header>
+  <h2>Dog da Praça</h2>
 </header>
 
-<div id="categoryBar"></div>
-
-<div id="setupBanner" class="hidden"></div>
-
-<main id="menuContainer"></main>
-
-<!-- BOTÃO CARRINHO -->
-<div id="floatingCartBar" class="hidden">
-  <span id="floatingItemCount"></span>
-  <span id="floatingTotal"></span>
-  <button id="floatingCartBtn">Ver carrinho</button>
-</div>
-
-<!-- ITEM -->
-<div id="itemOverlay" class="overlay hidden">
-  <div class="sheet">
-    <button id="itemSheetClose">X</button>
-    <h2 id="itemSheetTitle"></h2>
-    <p id="itemSheetDesc"></p>
-    <div id="itemSheetPrice"></div>
-
-    <div>
-      <button id="itemQtyMinus">-</button>
-      <span id="itemQtyValue">1</span>
-      <button id="itemQtyPlus">+</button>
-    </div>
-
-    <textarea id="itemObs" placeholder="Alguma observação?"></textarea>
-
-    <button id="addToCartBtn">Adicionar</button>
-  </div>
-</div>
+<main id="menu"></main>
 
 <!-- CARRINHO -->
-<div id="cartOverlay" class="overlay hidden">
-  <div class="sheet">
-    <button id="cartSheetClose">X</button>
-
-    <div id="cartLinesContainer"></div>
-
-    <div>
-      Total: <span id="cartTotalValue"></span>
-    </div>
-
-    <button id="goToCheckoutBtn">Continuar</button>
-  </div>
+<div id="cart">
+  <span id="cartInfo">0 itens</span>
+  <button onclick="abrirCheckout()">Finalizar</button>
 </div>
 
 <!-- CHECKOUT -->
-<div id="checkoutOverlay" class="overlay hidden">
-  <div class="sheet">
-    <button id="checkoutSheetClose">X</button>
+<div id="checkout" style="display:none; padding:10px; background:white; position:fixed; top:0; left:0; right:0;">
+  <h3>Finalizar Pedido</h3>
 
-    <form id="checkoutForm">
+  <input id="nome" placeholder="Nome"><br><br>
+  <input id="endereco" placeholder="Endereço"><br><br>
+  <input id="telefone" placeholder="Telefone"><br><br>
 
-      <input id="custNome" placeholder="Nome" required>
-      <input id="custEndereco" placeholder="Endereço" required>
-      <input id="custTelefone" placeholder="Telefone" required>
+  <select id="pagamento">
+    <option value="">Pagamento</option>
+    <option value="Pix">Pix</option>
+    <option value="Crédito">Crédito</option>
+    <option value="Débito">Débito</option>
+    <option value="Dinheiro">Dinheiro</option>
+  </select><br><br>
 
-      <h3>Forma de pagamento</h3>
+  <textarea id="obs" placeholder="Observações"></textarea><br><br>
 
-      <div class="payment-card" data-value="pix">Pix</div>
-      <div class="payment-card" data-value="credito">Crédito</div>
-      <div class="payment-card" data-value="debito">Débito</div>
-      <div class="payment-card" data-value="dinheiro">Dinheiro</div>
-
-      <div id="trocoField" class="hidden">
-        <input id="trocoValor" placeholder="Troco para quanto?">
-      </div>
-
-      <div>
-        Total: <span id="checkoutTotalValue"></span>
-      </div>
-
-      <button id="submitOrderBtn">Enviar pedido</button>
-
-    </form>
-  </div>
+  <button onclick="enviar()">Enviar Pedido</button>
 </div>
-
-<div id="toastContainer"></div>
 
 <script type="module" src="app.js"></script>
 
