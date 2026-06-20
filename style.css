@@ -4,14 +4,11 @@ body {
   background: #f2f2f2;
 }
 
-/* HEADER */
 header {
   background: #e21;
   color: white;
   padding: 16px;
   text-align: center;
-  font-size: 18px;
-  font-weight: bold;
 }
 
 /* PRODUTOS */
@@ -24,35 +21,23 @@ header {
   margin-bottom: 12px;
   border-radius: 10px;
   padding: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-.product h3 {
-  margin: 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .product p {
   color: gray;
-  font-size: 14px;
 }
 
-.product strong {
-  display: block;
-  margin-top: 5px;
-}
-
-/* BOTÃO */
 button {
   background: #e21;
   color: white;
   border: none;
   padding: 10px;
   border-radius: 8px;
-  margin-top: 5px;
   cursor: pointer;
 }
 
-/* CARRINHO */
+/* CARRINHO FIXO */
 #cart {
   position: fixed;
   bottom: 0;
@@ -67,14 +52,15 @@ button {
 
 /* CHECKOUT */
 #checkout {
-  background: white;
-  padding: 15px;
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  background: white;
   overflow: auto;
+  padding: 15px;
 }
 
 input, select {
