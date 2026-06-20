@@ -1,3 +1,4 @@
+let carrinho = [];
 import { BUSINESS_CONFIG } from "./config.js";
 import { PRODUTOS_EXEMPLO } from "./produtos-exemplo.js";
 
@@ -11,7 +12,7 @@ PRODUTOS_EXEMPLO.forEach(produto => {
     <h3>${produto.nome}</h3>
     <p>${produto.descricao}</p>
     <strong>R$ ${produto.preco}</strong>
-    <button onclick="pedir('${produto.nome}', ${produto.preco})">Adicionar</button>
+    <button onclick="adicionarCarrinho('${produto.nome}', ${produto.preco})">
   `;
 
   menu.appendChild(div);
