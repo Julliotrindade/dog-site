@@ -1,54 +1,41 @@
 function renderCarrinho() {
+  const container = document.getElementById("listaCarrinho");
+
+  if(carrinho.length === 0){
+    container.innerHTML = "Carrinho vazio";
+    return;
+  }
+
   let html = "";
 
   carrinho.forEach((item, index) => {
     html += `
       <div style="border:1px solid #ccc; margin:5px; padding:5px">
         <strong>${item.nome}</strong><br>
-        
+
         Quantidade:
         <button onclick="diminuir(${index})">-</button>
         ${item.quantidade}
         <button onclick="aumentar(${index})">+</button>
+
         <br><br>
 
         Observação:
         <input 
           value="${item.obs}" 
           onchange="editarObs(${index}, this.value)"
-        ><br><br>
+        >
+
+        <br><br>
 
         <button onclick="remover(${index})">Remover</button>
       </div>
     `;
   });
 
-  document.getElementById("checkout").innerHTML = html;
+  container.innerHTML = html;
 }
-
-window.aumentar = function(index) {
-  carrinho[index].quantidade++;
-  renderCarrinho();
-};
-
-window.diminuir = function(index) {
-  if (carrinho[index].quantidade > 1) {
-    carrinho[index].quantidade--;
-  } else {
-    carrinho.splice(index, 1);
-  }
-  renderCarrinho();
-};
-
-window.remover = function(index) {
-  carrinho.splice(index, 1);
-  renderCarrinho();
-};
-
-window.editarObs = function(index, valor) {
-  carrinho[index].obs = valor;
-};
-
+``
 
 
 import { PRODUTOS } from "./produtos.js";
