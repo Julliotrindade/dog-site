@@ -17,13 +17,16 @@ PRODUTOS.forEach(p => {
   div.className = "product";
 
   div.innerHTML = `
+    <img src="${p.imagem}" />
+
     <h3>${p.nome}</h3>
     <p>${p.descricao}</p>
-    <strong>R$ ${p.preco}</strong>
 
-    <button onclick="abrirModal('${p.nome}')">
+    <div class="price">R$ ${p.preco}</div>
+
+    <div class="btn-add" onclick="abrirModal('${p.nome}')">
       +
-    </button>
+    </div>
   `;
 
   menu.appendChild(div);
