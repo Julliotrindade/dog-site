@@ -4,11 +4,12 @@ let carrinho = [];
 let produtoAtual = null;
 let qtdAtual = 1;
 
+// =======================
 // ELEMENTOS
+// =======================
 const menu = document.getElementById("menu");
 const cartInfo = document.getElementById("cartInfo");
 
-// MODAL
 const modalProduto = document.getElementById("modalProduto");
 const modalImg = document.getElementById("modalImg");
 const modalNome = document.getElementById("modalNome");
@@ -17,7 +18,6 @@ const modalPreco = document.getElementById("modalPreco");
 const modalQtd = document.getElementById("modalQtd");
 const modalObs = document.getElementById("modalObs");
 
-// CARRINHO
 const carrinhoModal = document.getElementById("carrinhoModal");
 const listaCarrinho = document.getElementById("listaCarrinho");
 
@@ -29,17 +29,20 @@ PRODUTOS.forEach(p => {
   div.className = "product";
 
   div.innerHTML = `
-    <img src="${p.imagem}">
+    ${p.imagem}
     <h3>${p.nome}</h3>
     <p>R$ ${p.preco}</p>
-    <div class="btn-add" onclick="abrirModal('${p.nome}')">+</div>
+
+    <div class="btn-add" onclick="abrirModal('${p.nome}')">
+      +
+    </div>
   `;
 
   menu.appendChild(div);
 });
 
 // =======================
-// MODAL
+// MODAL PRODUTO
 // =======================
 window.abrirModal = nome => {
   produtoAtual = PRODUTOS.find(p => p.nome === nome);
@@ -49,6 +52,7 @@ window.abrirModal = nome => {
   modalNome.innerText = produtoAtual.nome;
   modalDesc.innerText = produtoAtual.descricao;
   modalPreco.innerText = "R$ " + produtoAtual.preco;
+
   modalQtd.innerText = qtdAtual;
   modalObs.value = "";
 
@@ -60,7 +64,7 @@ window.fecharModal = () => {
 };
 
 // =======================
-// QTD
+// QUANTIDADE
 // =======================
 window.aumentarQtd = () => {
   qtdAtual++;
@@ -73,7 +77,7 @@ window.diminuirQtd = () => {
 };
 
 // =======================
-// ADD
+// ADICIONAR AO CARRINHO
 // =======================
 window.confirmarAdd = () => {
   carrinho.push({
@@ -88,7 +92,7 @@ window.confirmarAdd = () => {
 };
 
 // =======================
-// ATUALIZAR
+// ATUALIZAR RESUMO
 // =======================
 function atualizarCarrinho() {
   let total = 0;
@@ -99,7 +103,7 @@ function atualizarCarrinho() {
 }
 
 // =======================
-// CARRINHO
+// ABRIR CARRINHO
 // =======================
 window.abrirCarrinho = () => {
   carrinhoModal.style.display = "block";
@@ -111,24 +115,73 @@ window.fecharCarrinho = () => {
 };
 
 // =======================
-// LISTAR
+// LISTAR ITENS (EDITÁVEL)
 // =======================
 function renderCarrinho() {
   let html = "";
 
+  if (carrinho.length === 0) {
+    listaCarrinho.innerHTML = "<p>Carrinho vazio</p>";
+    return;
+  }
+
   carrinho.forEach((item, i) => {
     html += `
-      <div style="margin-bottom:10px">
-        ${item.quantidade}x ${item.nome}
-        <br>${item.obs || ""}
+      <div style="background:#f5f5f5; padding:10px; margin-bottom:10px; border-radius:8px;">
+
+        <strong>${item.nome}</strong><br>
+
+        <!-- QUANTIDADE -->
+        <div style="margin-top:5px;">
+          <button onclick="diminuir(${i})">-</button>
+          ${item.quantidade}
+          <button onclick="aumentar(${i})">+</button>
+        </div>
+
+        <!-- OBS -->
+        <input 
+          value="${item.obs || ""}" 
+          placeholder="Observação"
+          onchange="editarObs(${i}, this.value)"
+        >
+
         <br>
-        <button class="btn-danger" onclick="remover(${i})">Remover</button>
+
+        <!-- REMOVER -->
+        <button class="btn-danger" onclick="remover(${i})">
+          Remover
+        </button>
+
       </div>
     `;
   });
 
   listaCarrinho.innerHTML = html;
 }
+
+// =======================
+// EDITAR ITENS
+// =======================
+window.aumentar = i => {
+  carrinho[i].quantidade++;
+  renderCarrinho();
+  atualizarCarrinho();
+};
+
+window.diminuir = i => {
+  if (carrinho[i].quantidade > 1) {
+    carrinho[i].quantidade--;
+  } else {
+    carrinho.splice(i, 1);
+  }
+
+  renderCarrinho();
+  atualizarCarrinho();
+};
+
+window.editarObs = (i, valor) => {
+  carrinho[i].obs = valor;
+};
 
 // =======================
 // REMOVER
@@ -140,7 +193,7 @@ window.remover = i => {
 };
 
 // =======================
-// LIMPAR
+// LIMPAR CARRINHO
 // =======================
 window.limparCarrinho = () => {
   carrinho = [];
@@ -152,5 +205,29 @@ window.limparCarrinho = () => {
 // ENVIAR
 // =======================
 window.enviar = () => {
-  alert("Pedido enviado!");
+
+  const nome = document.getElementById("nome").value;
+  const endereco = document.getElementById("endereco").value;
+  const telefone = document.getElementById("telefone").value;
+  const pagamento = document.getElementById("pagamento").value;
+
+  if (!nome || !endereco || !telefone || !pagamento) {
+    alert("Preencha tudo!");
+    return;
+  }
+
+  let msg = "Pedido:\n\n";
+
+  carrinho.forEach(item => {
+    msg += `${item.quantidade}x ${item.nome}`;
+    if (item.obs) msg += ` (${item.obs})`;
+    msg += "\n";
+  });
+
+  msg += `\n👤 ${nome}`;
+  msg += `\n📍 ${endereco}`;
+  msg += `\n📞 ${telefone}`;
+  msg += `\n💳 ${pagamento}`;
+
+  window.open(`https://wa.me/5584999999999?text=${encodeURIComponent(msg)}`);
 };
