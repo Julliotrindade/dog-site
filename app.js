@@ -22,7 +22,7 @@ PRODUTOS.forEach(p => {
     <strong>R$ ${p.preco}</strong>
 
     <button onclick="abrirModal('${p.nome}')">
-      Ver item
+      +
     </button>
   `;
 
