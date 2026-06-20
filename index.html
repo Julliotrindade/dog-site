@@ -1,85 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Dog da Praça</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+<div id="overlay"></div>
 
-<body>
+<div id="modalProduto">
 
-<header>Dog da Praça</header>
+  <!-- IMAGEM GRANDE -->
+  <img id="modalImg" class="modal-img">
 
-<main id="menu"></main>
+  <div class="modal-content">
+    <h2 id="modalNome"></h2>
+    <p id="modalDesc" class="modal-desc"></p>
+    <strong id="modalPreco"></strong>
 
-<!-- CARRINHO -->
-<div id="cart">
-  <span id="cartInfo">0 itens</span>
-  <button class="btn-finalizar" onclick="abrirCheckout()">Finalizar</button>
-</div>
+    <!-- QTD -->
+    <div class="qtd-box">
+      <button onclick="diminuirQtd()">-</button>
+      <span id="modalQtd">1</span>
+      <button onclick="aumentarQtd()">+</button>
+    </div>
 
-<!-- OVERLAY -->
-<div id="overlay" style="display:none;"></div>
+    <!-- OBS -->
+    <input id="modalObs" placeholder="Alguma observação?">
 
-<!-- MODAL PRODUTO -->
-<div id="modalProduto" style="display:none;">
+    <!-- BOTÕES -->
+    <button class="btn-add-main" onclick="confirmarAdd()">
+      Adicionar ao carrinho
+    </button>
 
-  <h2 id="modalNome"></h2>
-  <p id="modalDesc"></p>
-  <strong id="modalPreco"></strong>
+    <button class="btn-cancel" onclick="fecharModal()">
+      Cancelar
+    </button>
 
-  <div class="qtd-box">
-    <button onclick="diminuirQtd()">-</button>
-    <span id="modalQtd">1</span>
-    <button onclick="aumentarQtd()">+</button>
   </div>
 
-  <input id="modalObs" placeholder="Observação">
-
-  <button class="btn-add-main" onclick="confirmarAdd()">
-    Adicionar ao carrinho
-  </button>
-
-  <button class="btn-cancel" onclick="fecharModal()">
-    Cancelar
-  </button>
-
 </div>
-
-<!-- CHECKOUT -->
-<div id="checkout" style="display:none;">
-
-  <h2>Finalizar Pedido</h2>
-
-  <div id="listaCarrinho"></div>
-
-  <input id="nome" placeholder="Nome">
-  <input id="endereco" placeholder="Endereço">
-  <input id="telefone" placeholder="Telefone">
-
-  <select id="pagamento" onchange="mostrarTroco()">
-    <option value="">Pagamento</option>
-    <option value="Pix">Pix</option>
-    <option value="Débito">Débito</option>
-    <option value="Crédito">Crédito</option>
-    <option value="Dinheiro">Dinheiro</option>
-  </select>
-
-  <div id="areaTroco" style="display:none;">
-    <input id="valorPago" placeholder="Troco para quanto?" oninput="calcularTroco()">
-    <p id="trocoResultado"></p>
-  </div>
-
-  <button class="btn-add-main" onclick="enviar()">
-    Enviar Pedido
-  </button>
-
-  <button class="btn-cancel" onclick="fecharCheckout()">
-    Cancelar
-  </button>
-
-</div>
-
-<script type="module" src="app.js"></script>
-
-</body>
-</html>
