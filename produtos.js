@@ -1,13 +1,13 @@
 export const PRODUTOS = [
   {
     nome: "Tradicional",
-    descricao: "Pão de batata, salsicha, carne moída, frango, milho e ervilha, batata palha, queijo ralado",
+    descricao: "Pão de batata, salsicha, carne moída, frango, milho e ervilha, batata palha, queijo ralado.",
     preco: 7,
     imagem: "<img src='img/tradicional.jpg'>"
   },
   {
     nome: "Carne de sol na nata",
-    descricao: "Pão de batata, salsicha, carne de sol na nata, milho e ervilha, batata palha, queijo ralado",
+    descricao: "Pão de batata, salsicha, carne de sol na nata, milho e ervilha, batata palha, queijo ralado.",
     preco: 9,
     imagem: "<img src='img/carnesol.jpg'>"
   },
