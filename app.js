@@ -8,6 +8,14 @@ let qtdAtual = 1;
 const menu = document.getElementById("menu");
 const cartInfo = document.getElementById("cartInfo");
 
+function animarAdd() {
+  const cart = document.getElementById("cart");
+
+  cart.style.transform = "scale(1.1)";
+  setTimeout(() => {
+    cart.style.transform = "scale(1)";
+  }, 200);
+}
 
 // =======================
 // PRODUTOS
