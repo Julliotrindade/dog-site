@@ -5,8 +5,31 @@ let carrinho = [];
 let produtoAtual = null;
 let qtdAtual = 1;
 
+// ELEMENTOS
 const menu = document.getElementById("menu");
 const cartInfo = document.getElementById("cartInfo");
+const modalProduto = document.getElementById("modalProduto");
+const overlay = document.getElementById("overlay");
+
+const modalNome = document.getElementById("modalNome");
+const modalDesc = document.getElementById("modalDesc");
+const modalPreco = document.getElementById("modalPreco");
+const modalQtd = document.getElementById("modalQtd");
+const modalObs = document.getElementById("modalObs");
+
+const checkout = document.getElementById("checkout");
+const listaCarrinho = document.getElementById("listaCarrinho");
+
+const nomeInput = document.getElementById("nome");
+const enderecoInput = document.getElementById("endereco");
+const telefoneInput = document.getElementById("telefone");
+const pagamentoInput = document.getElementById("pagamento");
+
+const areaTroco = document.getElementById("areaTroco");
+const valorPagoInput = document.getElementById("valorPago");
+const trocoResultado = document.getElementById("trocoResultado");
+
+const cart = document.getElementById("cart");
 
 // =======================
 // RENDER PRODUTOS
@@ -16,7 +39,7 @@ PRODUTOS.forEach(p => {
   div.className = "product";
 
   div.innerHTML = `
-    <img src="${p.imagem}" id="img-${p.nome}">
+    ${p.imagem}
     <h3>${p.nome}</h3>
     <div class="price">R$ ${p.preco}</div>
 
@@ -33,11 +56,10 @@ window.abrirModal = nome => {
   produtoAtual = PRODUTOS.find(p => p.nome === nome);
   qtdAtual = 1;
 
-  document.getElementById("modalNome").innerText = produtoAtual.nome;
-  document.getElementById("modalPreco").innerText = "R$ " + produtoAtual.preco;
-  document.getElementById("modalQtd").innerText = qtdAtual;
-
-  document.getElementById("modalObs").value = "";
+  modalNome.innerText = produtoAtual.nome;
+  modalPreco.innerText = "R$ " + produtoAtual.preco;
+  modalQtd.innerText = qtdAtual;
+  modalObs.value = "";
 
   overlay.style.display = "block";
   modalProduto.style.display = "flex";
@@ -62,20 +84,9 @@ window.diminuirQtd = () => {
 };
 
 // =======================
-// ANIMAÇÃO CARRINHO
-// =======================
-function animarCart() {
-  cart.style.transform = "scale(1.1)";
-  setTimeout(() => {
-    cart.style.transform = "scale(1)";
-  }, 200);
-}
-
-// =======================
 // ADICIONAR
 // =======================
 window.confirmarAdd = () => {
-
   carrinho.push({
     nome: produtoAtual.nome,
     preco: produtoAtual.preco,
@@ -84,7 +95,6 @@ window.confirmarAdd = () => {
   });
 
   atualizarCarrinho();
-  animarCart();
   fecharModal();
 };
 
@@ -117,7 +127,7 @@ window.fecharCheckout = () => {
 };
 
 // =======================
-// LISTAR CARRINHO
+// LISTAR
 // =======================
 function renderCarrinho() {
   let html = "";
@@ -127,6 +137,65 @@ function renderCarrinho() {
       <div>
         ${item.quantidade}x ${item.nome}
         <br>${item.obs || ""}
-        <br>
-        <button onclick="remover(${i})">Remover</button>
+        <br><button onclick="remover(${i})">Remover</button>
         <hr>
+      </div>
+    `;
+  });
+
+  listaCarrinho.innerHTML = html;
+}
+
+// =======================
+// REMOVER
+// =======================
+window.remover = i => {
+  carrinho.splice(i, 1);
+  renderCarrinho();
+  atualizarCarrinho();
+};
+
+// =======================
+// TROCO
+// =======================
+window.mostrarTroco = () => {
+  areaTroco.style.display =
+    pagamentoInput.value === "Dinheiro" ? "block" : "none";
+};
+
+window.calcularTroco = () => {
+  let total = 0;
+  carrinho.forEach(i => total += i.preco * i.quantidade);
+
+  const valor = parseFloat(valorPagoInput.value);
+
+  if (!valor || valor < total) {
+    trocoResultado.innerText = "";
+    return;
+  }
+
+  trocoResultado.innerText =
+    "Troco: R$ " + (valor - total).toFixed(2);
+};
+
+// =======================
+// ENVIAR
+// =======================
+window.enviar = () => {
+  if (!nomeInput.value || !enderecoInput.value || !telefoneInput.value || !pagamentoInput.value) {
+    alert("Preencha todos os dados!");
+    return;
+  }
+
+  let msg = "Pedido:\n\n";
+
+  carrinho.forEach(i => {
+    msg += `${i.quantidade}x ${i.nome}`;
+    if (i.obs) msg += ` (${i.obs})`;
+    msg += "\n";
+  });
+
+  msg += `\n${nomeInput.value}\n${enderecoInput.value}\n${telefoneInput.value}\n${pagamentoInput.value}`;
+
+  window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`);
+};
