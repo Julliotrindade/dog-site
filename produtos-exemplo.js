@@ -1,20 +1,17 @@
-export const PRODUTOS_EXEMPLO = [
+export const PRODUTOS = [
   {
     nome: "Cachorro Simples",
     descricao: "Pão, salsicha e molho",
-    preco: 10,
-    categoria: "hotdogs",
+    preco: 10
   },
   {
     nome: "Cachorro Completo",
-    descricao: "Completo com tudo",
-    preco: 15,
-    categoria: "hotdogs",
+    descricao: "Com tudo",
+    preco: 15
   },
   {
     nome: "Refrigerante",
     descricao: "Lata 350ml",
-    preco: 6,
-    categoria: "bebidas",
+    preco: 6
   }
 ];
