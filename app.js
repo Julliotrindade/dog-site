@@ -6,9 +6,7 @@ let carrinho = [];
 const menu = document.getElementById("menu");
 const cartInfo = document.getElementById("cartInfo");
 
-// =======================
-// MOSTRAR PRODUTOS
-// =======================
+// PRODUTOS
 PRODUTOS.forEach(p => {
   const div = document.createElement("div");
   div.className = "product";
@@ -23,9 +21,7 @@ PRODUTOS.forEach(p => {
   menu.appendChild(div);
 });
 
-// =======================
-// ADICIONAR AO CARRINHO
-// =======================
+// ADICIONAR
 window.add = function(nome, preco) {
   carrinho.push({
     nome,
@@ -37,57 +33,57 @@ window.add = function(nome, preco) {
   atualizarCarrinho();
 };
 
-// =======================
-// ATUALIZAR TEXTO CARRINHO
-// =======================
+// ATUALIZAR CARRINHO
 function atualizarCarrinho() {
-  cartInfo.innerText = carrinho.length + " itens";
+  let total = 0;
+
+  carrinho.forEach(i => {
+    total += i.preco * i.quantidade;
+  });
+
+  cartInfo.innerText = `${carrinho.length} itens | R$ ${total}`;
 }
 
-// =======================
-// ABRIR CHECKOUT
-// =======================
+// ABRIR
 window.abrirCheckout = function() {
   document.getElementById("checkout").style.display = "block";
   renderCarrinho();
 };
 
-// =======================
-// RENDER CARRINHO
-// =======================
+// FECHAR
+window.fecharCheckout = function() {
+  document.getElementById("checkout").style.display = "none";
+};
+
+// RENDER
 function renderCarrinho() {
   const container = document.getElementById("listaCarrinho");
 
-  if (!container) return;
-
   if (carrinho.length === 0) {
-    container.innerHTML = "<p>Carrinho vazio</p>";
+    container.innerHTML = "Carrinho vazio";
     return;
   }
 
   let html = "";
 
-  carrinho.forEach((item, index) => {
+  carrinho.forEach((item, i) => {
     html += `
-      <div style="border:1px solid #ccc; margin:5px; padding:10px">
-        <strong>${item.nome}</strong><br><br>
+      <div style="background:#f5f5f5; padding:10px; margin-bottom:10px; border-radius:8px">
 
-        Quantidade:
-        <button onclick="diminuir(${index})">-</button>
+        <strong>${item.nome}</strong><br>
+
+        <button onclick="diminuir(${i})">-</button>
         ${item.quantidade}
-        <button onclick="aumentar(${index})">+</button>
+        <button onclick="aumentar(${i})">+</button>
 
-        <br><br>
-
-        Observação:
         <input 
-          value="${item.obs}" 
-          onchange="editarObs(${index}, this.value)"
+          value="${item.obs}"
+          placeholder="Observação"
+          onchange="editarObs(${i}, this.value)"
         >
 
-        <br><br>
+        <button onclick="remover(${i})">Remover</button>
 
-        <button onclick="remover(${index})">Remover</button>
       </div>
     `;
   });
@@ -95,35 +91,34 @@ function renderCarrinho() {
   container.innerHTML = html;
 }
 
-// =======================
-// AÇÕES DO CARRINHO
-// =======================
-window.aumentar = function(index) {
-  carrinho[index].quantidade++;
+// FUNÇÕES
+window.aumentar = i => {
+  carrinho[i].quantidade++;
   renderCarrinho();
+  atualizarCarrinho();
 };
 
-window.diminuir = function(index) {
-  if (carrinho[index].quantidade > 1) {
-    carrinho[index].quantidade--;
+window.diminuir = i => {
+  if (carrinho[i].quantidade > 1) {
+    carrinho[i].quantidade--;
   } else {
-    carrinho.splice(index, 1);
+    carrinho.splice(i, 1);
   }
   renderCarrinho();
+  atualizarCarrinho();
 };
 
-window.remover = function(index) {
-  carrinho.splice(index, 1);
+window.remover = i => {
+  carrinho.splice(i, 1);
   renderCarrinho();
+  atualizarCarrinho();
 };
 
-window.editarObs = function(index, valor) {
-  carrinho[index].obs = valor;
+window.editarObs = (i, val) => {
+  carrinho[i].obs = val;
 };
 
-// =======================
-// ENVIAR WHATSAPP
-// =======================
+// WHATSAPP
 window.enviar = function() {
   if (carrinho.length === 0) {
     alert("Carrinho vazio");
@@ -148,6 +143,5 @@ window.enviar = function() {
   msg += `\n📞 ${telefone}`;
   msg += `\n💳 ${pagamento}`;
 
-  const url = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
-  window.open(url, "_blank");
+  window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`);
 };
