@@ -24,21 +24,33 @@ export const PRODUTOS = [
     imagem: "<img src='img/americano.jpg'>"
   },
   {
-    nome: "Guaraná 1L",
+    nome: "Pepis 1L",
     descricao: "Gelado",
     preco: 10,
     imagem: "<img src='img/americano.jpg'>"
   },
   {
-    nome: "Guaraná 1L",
+    nome: "Coca Cola Zero 1L",
     descricao: "Gelado",
     preco: 10,
     imagem: "<img src='img/americano.jpg'>"
   },
   {
-    nome: "Guaraná 1L",
-    descricao: "Gelado",
-    preco: 10,
+    nome: "Uva 250ml",
+    descricao: "Dore uva 250ml",
+    preco: 3,
     imagem: "<img src='img/americano.jpg'>"
   },
+  {
+    nome: "Cola 250ml",
+    descricao: "Dore Cola 250ml",
+    preco: 3,
+    imagem: "<img src='img/americano.jpg'>"
+  },
+  {
+    nome: "Soda 250ml",
+    descricao: "Soda limão 250ml",
+    preco: 3,
+    imagem: "<img src='img/americano.jpg'>"
+  }
 ];
