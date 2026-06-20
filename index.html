@@ -11,54 +11,62 @@
 
 <main id="menu"></main>
 
-<!-- CARRINHO -->
+<!-- BOTÃO CARRINHO -->
 <div id="cart">
   <span id="cartInfo">0 itens</span>
-  <button onclick="abrirCheckout()">Finalizar</button>
+  <button onclick="abrirCarrinho()">Ver Carrinho</button>
 </div>
 
 <!-- OVERLAY -->
 <div id="overlay"></div>
 
-<!-- MODAL -->
+<!-- MODAL PRODUTO -->
 <div id="modalProduto">
 
-  <img id="modalImg" class="modal-img">
+  <img id="modalImg">
 
-  <div class="modal-content">
-    <h2 id="modalNome"></h2>
-    <p id="modalDesc" class="modal-desc"></p>
-    <strong id="modalPreco"></strong>
+  <h2 id="modalNome"></h2>
+  <p id="modalDesc"></p>
+  <strong id="modalPreco"></strong>
 
-    <div class="qtd-box">
-      <button onclick="diminuirQtd()">-</button>
-      <span id="modalQtd">1</span>
-      <button onclick="aumentarQtd()">+</button>
-    </div>
-
-    <input id="modalObs" placeholder="Observação">
-
-    <button class="btn-add-main" onclick="confirmarAdd()">
-      Adicionar ao carrinho
-    </button>
-
-    <button onclick="fecharModal()">Cancelar</button>
+  <div>
+    <button onclick="diminuirQtd()">-</button>
+    <span id="modalQtd">1</span>
+    <button onclick="aumentarQtd()">+</button>
   </div>
+
+  <input id="modalObs" placeholder="Observação">
+
+  <button onclick="confirmarAdd()">Adicionar</button>
+  <button onclick="fecharModal()">Cancelar</button>
 
 </div>
 
-<!-- CHECKOUT -->
-<div id="checkout" style="display:none;">
+<!-- CARRINHO -->
+<div id="carrinhoModal" style="display:none;">
 
-  <h2>Finalizar Pedido</h2>
+  <h2>Seu Carrinho</h2>
+
   <div id="listaCarrinho"></div>
+
+  <button onclick="limparCarrinho()">Esvaziar Carrinho</button>
+
+  <hr>
+
+  <h3>Finalizar Pedido</h3>
 
   <input id="nome" placeholder="Nome">
   <input id="endereco" placeholder="Endereço">
   <input id="telefone" placeholder="Telefone">
 
+  <select id="pagamento">
+    <option value="">Pagamento</option>
+    <option value="Pix">Pix</option>
+    <option value="Dinheiro">Dinheiro</option>
+  </select>
+
   <button onclick="enviar()">Enviar Pedido</button>
-  <button onclick="fecharCheckout()">Cancelar</button>
+  <button onclick="fecharCarrinho()">Fechar</button>
 
 </div>
 
@@ -66,4 +74,3 @@
 
 </body>
 </html>
-``
