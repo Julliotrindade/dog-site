@@ -1,3 +1,17 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #f2f2f2;
+}
+
+/* HEADER */
+header {
+  background: #e21;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
 /* GRID */
 #menu {
   display: grid;
@@ -9,13 +23,17 @@
 /* CARD */
 .product {
   background: white;
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 10px;
   position: relative;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
 }
 
-/* IMAGEM */
+.product:hover {
+  transform: scale(1.02);
+}
+
 .product img {
   width: 100%;
   border-radius: 8px;
@@ -23,23 +41,9 @@
   object-fit: cover;
 }
 
-/* NOME */
-.product h3 {
-  font-size: 14px;
-  margin: 5px 0;
-}
-
-/* DESCRIÇÃO */
-.product p {
-  font-size: 12px;
-  color: gray;
-}
-
-/* PREÇO */
 .price {
   font-weight: bold;
   color: green;
-  margin-top: 5px;
 }
 
 /* BOTÃO + */
@@ -57,59 +61,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 }
 
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #f2f2f2;
+.btn-add:active {
+  transform: scale(0.85);
 }
 
-header {
-  background: #e21;
-  color: white;
-  padding: 16px;
-  text-align: center;
-}
-
-/* PRODUTOS */
-#menu {
-  padding: 10px;
-}
-
-.product {
-  background: white;
-  margin-bottom: 12px;
-  border-radius: 10px;
-  padding: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.product p {
-  color: gray;
-}
-
-button {
-  background: #e21;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-/* CARRINHO FIXO */
+/* CARRINHO */
 #cart {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
   background: #e21;
   color: white;
+  width: 100%;
+  padding: 12px;
   display: flex;
   justify-content: space-between;
-  padding: 12px;
+  transition: 0.2s;
 }
 
 /* CHECKOUT */
@@ -117,14 +85,33 @@ button {
   display: none;
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   background: white;
-  overflow: auto;
+  width: 100%;
+  height: 100%;
   padding: 15px;
+  overflow: auto;
 }
 
+/* MODAL */
+#modalProduto {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 75%;
+  background: white;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 15px;
+  animation: subir 0.3s;
+}
+
+@keyframes subir {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* INPUT */
 input, select {
   width: 100%;
   padding: 10px;
@@ -133,34 +120,6 @@ input, select {
   border: 1px solid #ccc;
 }
 
-.product {
-  transition: transform 0.2s;
-}
-
-.product:hover {
-  transform: scale(1.02);
-}
-
-/* botão limpar */
-.btn-clear {
-  background: #555;
-  margin-top: 10px;
-}
-
-/* animação modal */
-#modalProduto {
-  animation: fadeIn 0.2s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.btn-add:active {
-  transform: scale(0.9);
-}
-
-.btn-add {
-  transition: transform 0.15s ease;
+#areaTroco {
+  display: none;
 }
