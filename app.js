@@ -2,17 +2,15 @@ import { PRODUTOS } from "./produtos.js";
 import { CONFIG } from "./config.js";
 
 let carrinho = [];
-
-// CONTROLE DO MODAL
 let produtoAtual = null;
 let qtdAtual = 1;
 
-// ELEMENTOS
 const menu = document.getElementById("menu");
 const cartInfo = document.getElementById("cartInfo");
 
+
 // =======================
-// MOSTRAR PRODUTOS
+// PRODUTOS
 // =======================
 PRODUTOS.forEach(p => {
   const div = document.createElement("div");
@@ -31,8 +29,9 @@ PRODUTOS.forEach(p => {
   menu.appendChild(div);
 });
 
+
 // =======================
-// ABRIR MODAL
+// MODAL
 // =======================
 window.abrirModal = function(nome) {
   produtoAtual = PRODUTOS.find(p => p.nome === nome);
@@ -44,37 +43,66 @@ window.abrirModal = function(nome) {
   document.getElementById("modalQtd").innerText = qtdAtual;
   document.getElementById("modalObs").value = "";
 
+  // SABORES
+  const saboresDiv = document.getElementById("sabores");
+  saboresDiv.innerHTML = "";
+
+  if (produtoAtual.sabores) {
+    saboresDiv.innerHTML = "<h4>Escolha o sabor:</h4>";
+
+    produtoAtual.sabores.forEach(s => {
+      saboresDiv.innerHTML += `
+        <label>
+          <input type="radio" name="sabor" value="${s}">
+          ${s}
+        </label><br>
+      `;
+    });
+  }
+
   document.getElementById("modalProduto").style.display = "block";
 };
 
-// =======================
-// FECHAR MODAL
-// =======================
-window.fecharModal = function() {
+window.fecharModal = () => {
   document.getElementById("modalProduto").style.display = "none";
 };
+
 
 // =======================
 // QUANTIDADE
 // =======================
-window.aumentarQtd = function() {
+window.aumentarQtd = () => {
   qtdAtual++;
   document.getElementById("modalQtd").innerText = qtdAtual;
 };
 
-window.diminuirQtd = function() {
+window.diminuirQtd = () => {
   if (qtdAtual > 1) qtdAtual--;
   document.getElementById("modalQtd").innerText = qtdAtual;
 };
 
+
 // =======================
-// CONFIRMAR ADD
+// ADD CARRINHO
 // =======================
-window.confirmarAdd = function() {
+window.confirmarAdd = () => {
+  let saborSelecionado = "";
+
+  if (produtoAtual.sabores) {
+    const sabor = document.querySelector("input[name='sabor']:checked");
+
+    if (!sabor) {
+      alert("Escolha um sabor!");
+      return;
+    }
+
+    saborSelecionado = sabor.value;
+  }
+
   const obs = document.getElementById("modalObs").value;
 
   carrinho.push({
-    nome: produtoAtual.nome,
+    nome: produtoAtual.nome + (saborSelecionado ? " (" + saborSelecionado + ")" : ""),
     preco: produtoAtual.preco,
     quantidade: qtdAtual,
     obs
@@ -83,6 +111,7 @@ window.confirmarAdd = function() {
   fecharModal();
   atualizarCarrinho();
 };
+
 
 // =======================
 // ATUALIZAR CARRINHO
@@ -97,61 +126,100 @@ function atualizarCarrinho() {
   cartInfo.innerText = `${carrinho.length} itens | R$ ${total}`;
 }
 
+
 // =======================
 // CHECKOUT
 // =======================
-window.abrirCheckout = function() {
+window.abrirCheckout = () => {
+  if (carrinho.length === 0) {
+    alert("Adicione algo primeiro!");
+    return;
+  }
+
   document.getElementById("checkout").style.display = "block";
   renderCarrinho();
 };
 
-window.fecharCheckout = function() {
+window.fecharCheckout = () => {
   document.getElementById("checkout").style.display = "none";
 };
+
+
+// =======================
+// LIMPAR CARRINHO
+// =======================
+window.limpar = () => {
+  carrinho = [];
+  renderCarrinho();
+  atualizarCarrinho();
+};
+
 
 // =======================
 // RENDER CARRINHO
 // =======================
 function renderCarrinho() {
-  const container = document.getElementById("listaCarrinho");
+  const c = document.getElementById("listaCarrinho");
 
-  let html = "";
+  let html = `<button class="btn-clear" onclick="limpar()">Limpar Carrinho</button><br><br>`;
 
   carrinho.forEach((item, i) => {
     html += `
-      <div>
+      <div style="background:#eee; padding:10px; margin:5px;">
         ${item.quantidade}x ${item.nome}
         <br>
-        ${item.obs}
+        ${item.obs || ""}
         <br>
         <button onclick="remover(${i})">Remover</button>
-      </div><br>
+      </div>
     `;
   });
 
-  container.innerHTML = html;
+  c.innerHTML = html;
 }
+
 
 // =======================
 // REMOVER
 // =======================
-window.remover = function(i) {
+window.remover = i => {
   carrinho.splice(i, 1);
   renderCarrinho();
   atualizarCarrinho();
 };
 
+
 // =======================
 // ENVIAR WHATSAPP
 // =======================
-window.enviar = function() {
-  let msg = `Pedido:\n\n`;
+window.enviar = () => {
+  if (carrinho.length === 0) {
+    alert("Carrinho vazio!");
+    return;
+  }
+
+  const nome = document.getElementById("nome").value;
+  const endereco = document.getElementById("endereco").value;
+  const telefone = document.getElementById("telefone").value;
+  const pagamento = document.getElementById("pagamento").value;
+
+  if (!nome || !endereco || !telefone || !pagamento) {
+    alert("Preencha todos os dados!");
+    return;
+  }
+
+  let msg = `🌭 Pedido - ${CONFIG.nome}\n\n`;
 
   carrinho.forEach(item => {
     msg += `${item.quantidade}x ${item.nome}`;
-    if(item.obs) msg += ` (${item.obs})`;
+    if (item.obs) msg += ` (${item.obs})`;
     msg += "\n";
   });
+
+  msg += `\n👤 ${nome}`;
+  msg += `\n📍 ${endereco}`;
+  msg += `\n📞 ${telefone}`;
+  msg += `\n💳 ${pagamento}`;
 
   window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`);
 };
