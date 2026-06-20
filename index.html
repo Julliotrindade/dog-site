@@ -14,42 +14,41 @@
 <!-- BOTÃO CARRINHO -->
 <div id="cart">
   <span id="cartInfo">0 itens</span>
-  <button onclick="abrirCarrinho()">Ver Carrinho</button>
+  <button class="btn-primary" onclick="abrirCarrinho()">Ver Carrinho</button>
 </div>
-
-<!-- OVERLAY -->
-<div id="overlay"></div>
 
 <!-- MODAL PRODUTO -->
 <div id="modalProduto">
 
   <img id="modalImg">
 
-  <h2 id="modalNome"></h2>
-  <p id="modalDesc"></p>
-  <strong id="modalPreco"></strong>
+  <div class="modal-content">
+    <h2 id="modalNome"></h2>
+    <p id="modalDesc"></p>
+    <strong id="modalPreco"></strong>
 
-  <div>
-    <button onclick="diminuirQtd()">-</button>
-    <span id="modalQtd">1</span>
-    <button onclick="aumentarQtd()">+</button>
+    <div class="qtd-box">
+      <button onclick="diminuirQtd()">-</button>
+      <span id="modalQtd">1</span>
+      <button onclick="aumentarQtd()">+</button>
+    </div>
+
+    <input id="modalObs" placeholder="Observação">
+
+    <button class="btn-primary" onclick="confirmarAdd()">Adicionar</button>
+    <button class="btn-secondary" onclick="fecharModal()">Cancelar</button>
   </div>
-
-  <input id="modalObs" placeholder="Observação">
-
-  <button onclick="confirmarAdd()">Adicionar</button>
-  <button onclick="fecharModal()">Cancelar</button>
 
 </div>
 
-<!-- CARRINHO -->
-<div id="carrinhoModal" style="display:none;">
+<!-- MODAL CARRINHO -->
+<div id="carrinhoModal">
 
   <h2>Seu Carrinho</h2>
 
   <div id="listaCarrinho"></div>
 
-  <button onclick="limparCarrinho()">Esvaziar Carrinho</button>
+  <button class="btn-danger" onclick="limparCarrinho()">Esvaziar Carrinho</button>
 
   <hr>
 
@@ -65,8 +64,8 @@
     <option value="Dinheiro">Dinheiro</option>
   </select>
 
-  <button onclick="enviar()">Enviar Pedido</button>
-  <button onclick="fecharCarrinho()">Fechar</button>
+  <button class="btn-primary" onclick="enviar()">Enviar Pedido</button>
+  <button class="btn-secondary" onclick="fecharCarrinho()">Fechar</button>
 
 </div>
 
