@@ -53,4 +53,6 @@ export const PRODUTOS = [
     preco: 3,
     imagem: "<img src='img/americano.jpg'>"
   }
+
+  
 ];
