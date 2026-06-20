@@ -23,7 +23,14 @@ PRODUTOS.forEach(p => {
 
 // ADICIONAR AO CARRINHO
 window.add = function(nome, preco) {
-  carrinho.push({ nome, preco });
+
+carrinho.push({
+  nome: nome,
+  preco: preco,
+  quantidade: 1,
+  obs: ""
+});
+
   atualizarCarrinho();
 };
 
