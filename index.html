@@ -1,3 +1,32 @@
+<!-- MODAL DO PRODUTO -->
+<div id="modalProduto" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:white; z-index:999; padding:20px; overflow:auto;">
+
+  <h2 id="modalNome"></h2>
+  <p id="modalDesc"></p>
+  <strong id="modalPreco"></strong>
+
+  <br><br>
+
+  <h3>Quantidade</h3>
+  <button onclick="diminuirQtd()">-</button>
+  <span id="modalQtd">1</span>
+  <button onclick="aumentarQtd()">+</button>
+
+  <br><br>
+
+  <h3>Observação</h3>
+  <input id="modalObs" placeholder="Ex: sem milho">
+
+  <br><br>
+
+  <button onclick="confirmarAdd()">Adicionar ao carrinho</button>
+  <br><br>
+  <button onclick="fecharModal()">Cancelar</button>
+
+</div>
+``
+
+
 <!DOCTYPE html>
 <html>
 <head>
