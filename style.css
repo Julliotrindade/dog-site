@@ -1,3 +1,65 @@
+/* GRID */
+#menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 10px;
+}
+
+/* CARD */
+.product {
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* IMAGEM */
+.product img {
+  width: 100%;
+  border-radius: 8px;
+  height: 120px;
+  object-fit: cover;
+}
+
+/* NOME */
+.product h3 {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+/* DESCRIÇÃO */
+.product p {
+  font-size: 12px;
+  color: gray;
+}
+
+/* PREÇO */
+.price {
+  font-weight: bold;
+  color: green;
+  margin-top: 5px;
+}
+
+/* BOTÃO + */
+.btn-add {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  font-size: 22px;
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
 body {
   margin: 0;
   font-family: Arial;
