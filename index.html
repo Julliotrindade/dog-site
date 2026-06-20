@@ -1,17 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dog da Praça</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header class="site-header">
-  <h1>Dog da Praça</h1>
+  <div class="brand">
+    <span id="brandName"></span>
+    <span id="brandSlogan"></span>
+  </div>
+
+  <button id="openCartBtn">
+    🛒 (<span id="cartCount">0</span>)
+  </button>
 </header>
 
+<div id="categoryBar"></div>
+
+<div id="setupBanner" class="hidden"></div>
+
 <main id="menuContainer"></main>
+
+<!-- BOTÃO CARRINHO -->
+<div id="floatingCartBar" class="hidden">
+  <span id="floatingItemCount"></span>
+  <span id="floatingTotal"></span>
+  <button id="floatingCartBtn">Ver carrinho</button>
+</div>
+
+<!-- ITEM -->
+<div id="itemOverlay" class="overlay hidden">
+  <div class="sheet">
+    <button id="itemSheetClose">X</button>
+    <h2 id="itemSheetTitle"></h2>
+    <p id="itemSheetDesc"></p>
+    <div id="itemSheetPrice"></div>
+
+    <div>
+      <button id="itemQtyMinus">-</button>
+      <span id="itemQtyValue">1</span>
+      <button id="itemQtyPlus">+</button>
+    </div>
+
+    <textarea id="itemObs" placeholder="Alguma observação?"></textarea>
+
+    <button id="addToCartBtn">Adicionar</button>
+  </div>
+</div>
+
+<!-- CARRINHO -->
+<div id="cartOverlay" class="overlay hidden">
+  <div class="sheet">
+    <button id="cartSheetClose">X</button>
+
+    <div id="cartLinesContainer"></div>
+
+    <div>
+      Total: <span id="cartTotalValue"></span>
+    </div>
+
+    <button id="goToCheckoutBtn">Continuar</button>
+  </div>
+</div>
+
+<!-- CHECKOUT -->
+<div id="checkoutOverlay" class="overlay hidden">
+  <div class="sheet">
+    <button id="checkoutSheetClose">X</button>
+
+    <form id="checkoutForm">
+
+      <input id="custNome" placeholder="Nome" required>
+      <input id="custEndereco" placeholder="Endereço" required>
+      <input id="custTelefone" placeholder="Telefone" required>
+
+      <h3>Forma de pagamento</h3>
+
+      <div class="payment-card" data-value="pix">Pix</div>
+      <div class="payment-card" data-value="credito">Crédito</div>
+      <div class="payment-card" data-value="debito">Débito</div>
+      <div class="payment-card" data-value="dinheiro">Dinheiro</div>
+
+      <div id="trocoField" class="hidden">
+        <input id="trocoValor" placeholder="Troco para quanto?">
+      </div>
+
+      <div>
+        Total: <span id="checkoutTotalValue"></span>
+      </div>
+
+      <button id="submitOrderBtn">Enviar pedido</button>
+
+    </form>
+  </div>
+</div>
+
+<div id="toastContainer"></div>
 
 <script type="module" src="app.js"></script>
 
