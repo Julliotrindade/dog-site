@@ -5,9 +5,9 @@ let carrinho = [];
 let produtoAtual = null;
 let qtdAtual = 1;
 
-// ELEMENTOS
 const menu = document.getElementById("menu");
 const cartInfo = document.getElementById("cartInfo");
+
 const modalProduto = document.getElementById("modalProduto");
 const overlay = document.getElementById("overlay");
 
@@ -16,53 +16,40 @@ const modalDesc = document.getElementById("modalDesc");
 const modalPreco = document.getElementById("modalPreco");
 const modalQtd = document.getElementById("modalQtd");
 const modalObs = document.getElementById("modalObs");
+const modalImg = document.getElementById("modalImg");
 
 const checkout = document.getElementById("checkout");
 const listaCarrinho = document.getElementById("listaCarrinho");
 
-const nomeInput = document.getElementById("nome");
-const enderecoInput = document.getElementById("endereco");
-const telefoneInput = document.getElementById("telefone");
-const pagamentoInput = document.getElementById("pagamento");
-
-const areaTroco = document.getElementById("areaTroco");
-const valorPagoInput = document.getElementById("valorPago");
-const trocoResultado = document.getElementById("trocoResultado");
-
-const cart = document.getElementById("cart");
-
-// =======================
-// RENDER PRODUTOS
-// =======================
+// RENDER
 PRODUTOS.forEach(p => {
   const div = document.createElement("div");
   div.className = "product";
 
   div.innerHTML = `
-    ${p.imagem}
+    <img src="${p.imagem}">
     <h3>${p.nome}</h3>
-    <div class="price">R$ ${p.preco}</div>
-
+    <div>R$ ${p.preco}</div>
     <div class="btn-add" onclick="abrirModal('${p.nome}')">+</div>
   `;
 
   menu.appendChild(div);
 });
 
-// =======================
 // MODAL
-// =======================
 window.abrirModal = nome => {
   produtoAtual = PRODUTOS.find(p => p.nome === nome);
   qtdAtual = 1;
 
   modalNome.innerText = produtoAtual.nome;
+  modalDesc.innerText = produtoAtual.descricao;
   modalPreco.innerText = "R$ " + produtoAtual.preco;
   modalQtd.innerText = qtdAtual;
   modalObs.value = "";
+  modalImg.src = produtoAtual.imagem;
 
   overlay.style.display = "block";
-  modalProduto.style.display = "flex";
+  modalProduto.style.display = "block";
 };
 
 window.fecharModal = () => {
@@ -70,9 +57,7 @@ window.fecharModal = () => {
   modalProduto.style.display = "none";
 };
 
-// =======================
-// QUANTIDADE
-// =======================
+// QTD
 window.aumentarQtd = () => {
   qtdAtual++;
   modalQtd.innerText = qtdAtual;
@@ -83,9 +68,7 @@ window.diminuirQtd = () => {
   modalQtd.innerText = qtdAtual;
 };
 
-// =======================
-// ADICIONAR
-// =======================
+// ADD
 window.confirmarAdd = () => {
   carrinho.push({
     nome: produtoAtual.nome,
@@ -98,104 +81,36 @@ window.confirmarAdd = () => {
   fecharModal();
 };
 
-// =======================
-// ATUALIZAR CARRINHO
-// =======================
+// CARRINHO
 function atualizarCarrinho() {
   let total = 0;
-
   carrinho.forEach(i => total += i.preco * i.quantidade);
-
   cartInfo.innerText = `${carrinho.length} itens | R$ ${total}`;
 }
 
-// =======================
 // CHECKOUT
-// =======================
 window.abrirCheckout = () => {
-  if (carrinho.length === 0) {
-    alert("Adicione algo primeiro!");
+  if (!carrinho.length) {
+    alert("Carrinho vazio");
     return;
   }
 
   checkout.style.display = "block";
-  renderCarrinho();
+
+  let html = "";
+  carrinho.forEach(i => {
+    html += `${i.quantidade}x ${i.nome}<br>`;
+  });
+
+  listaCarrinho.innerHTML = html;
 };
 
 window.fecharCheckout = () => {
   checkout.style.display = "none";
 };
 
-// =======================
-// LISTAR
-// =======================
-function renderCarrinho() {
-  let html = "";
-
-  carrinho.forEach((item, i) => {
-    html += `
-      <div>
-        ${item.quantidade}x ${item.nome}
-        <br>${item.obs || ""}
-        <br><button onclick="remover(${i})">Remover</button>
-        <hr>
-      </div>
-    `;
-  });
-
-  listaCarrinho.innerHTML = html;
-}
-
-// =======================
-// REMOVER
-// =======================
-window.remover = i => {
-  carrinho.splice(i, 1);
-  renderCarrinho();
-  atualizarCarrinho();
-};
-
-// =======================
-// TROCO
-// =======================
-window.mostrarTroco = () => {
-  areaTroco.style.display =
-    pagamentoInput.value === "Dinheiro" ? "block" : "none";
-};
-
-window.calcularTroco = () => {
-  let total = 0;
-  carrinho.forEach(i => total += i.preco * i.quantidade);
-
-  const valor = parseFloat(valorPagoInput.value);
-
-  if (!valor || valor < total) {
-    trocoResultado.innerText = "";
-    return;
-  }
-
-  trocoResultado.innerText =
-    "Troco: R$ " + (valor - total).toFixed(2);
-};
-
-// =======================
 // ENVIAR
-// =======================
 window.enviar = () => {
-  if (!nomeInput.value || !enderecoInput.value || !telefoneInput.value || !pagamentoInput.value) {
-    alert("Preencha todos os dados!");
-    return;
-  }
-
-  let msg = "Pedido:\n\n";
-
-  carrinho.forEach(i => {
-    msg += `${i.quantidade}x ${i.nome}`;
-    if (i.obs) msg += ` (${i.obs})`;
-    msg += "\n";
-  });
-
-  msg += `\n${nomeInput.value}\n${enderecoInput.value}\n${telefoneInput.value}\n${pagamentoInput.value}`;
-
-  window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`);
+  alert("Pedido enviado!");
 };
+``
